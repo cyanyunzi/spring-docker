@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  #服务名
+  web-service:
+    ports:
+      - "8080:8080"
+    build: .
+    depends_on:
+      - redis-service
+    container_name: web-container
+      # 加入自定义网络
+    networks:
+          - my-network
+  #服务名
+  redis-service:
+    image: redis
+    container_name: web-redis-container
+    ports:
+       - "6379:6379"
+    # 加入自定义网络
+    networks:
+      - my-network
+# 声明自定义网络
+networks:
+  my-network:
